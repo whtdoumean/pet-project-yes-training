@@ -4,9 +4,10 @@
     --accent-bright-color: #447bf2;
     --accent-bright-color-hover: #6893f0;
     --accent-color: #ecf3ff;
-    --accent-color-hover: #f3f7ff;
+    --accent-color-hover: #e0ecff;
     --footer-color: #f4f4f4;
     --shadow-card: 0px 6px 16px -6px rgba(0, 0, 0, 0.2);
+    --card-transform: translateY(-0.05rem);
     }
 
 
@@ -107,16 +108,13 @@ a {
 
 .main-page-cards {
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap:wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
     row-gap: 1rem;
 } 
 .main-page-card {
-    width: 32%;
-    min-height: 30%;
+    width: 100%;
     font-display: flex;
     flex-direction: column;
     padding: 1.5rem;
@@ -127,7 +125,7 @@ a {
 .main-page-card:hover {
     background-color: var(--accent-color-hover);
     box-shadow: var(--shadow-card);
-    transform: translateY(-0.1rem);
+    transform: var(--card-transform)
 }
 
 .main-page-card h3 {
@@ -154,6 +152,7 @@ a {
 .item:hover {
     background-color: var(--accent-color-hover);
     box-shadow: var(--shadow-card);
+    transform: var(--card-transform);
 }
 
 .item-title {
