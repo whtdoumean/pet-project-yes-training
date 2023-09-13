@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div th:replace="blocks/header :: header"></div>
+    <div th:replace="~{blocks/header :: header}"></div>
     <div class="main">
         <h1 th:text="${test}"></h1>
         <div class="main-title"><h2>Добро пожалововать в Тестовый Сервис Регистрации Автомобилей!</h2></div>
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div th:replace="blocks/footer :: footer"></div>
+    <div th:replace="~{blocks/footer :: footer}"></div>
 </div>
 </body>
 </html>

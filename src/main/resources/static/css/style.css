@@ -1,0 +1,221 @@
+:root {
+    --background-color: #f9f9f9;
+    --header-color: #0450F2;
+    --accent-bright-color: #447bf2;
+    --accent-bright-color-hover: #6893f0;
+    --accent-color: #ecf3ff;
+    --accent-color-hover: #e0ecff;
+    --footer-color: #f4f4f4;
+    --shadow-card: 0px 6px 16px -6px rgba(0, 0, 0, 0.2);
+    --card-transform: translateY(-0.05rem);
+    }
+
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html {
+    background-color: var(--footer-color);
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- HEADER --- */
+
+.header {
+    width: 82%;
+    height: 4vh;
+    padding: 1.5rem 1.5rem;
+    position: fixed;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--header-color);
+    color: white;
+}
+
+.header-title {
+    /* margin-right: 1.5rem; */
+    font-weight: bolder;
+    color: white;
+}
+
+.header-options {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+
+}
+
+.header-options a {
+    color: white;
+}
+
+.header-options a:not(:last-child) {
+    margin-right: 1.5rem;
+}
+
+/* --- MAIN --- */
+
+.main-title {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 2%;
+    margin-bottom: 1.75rem;
+}
+
+.main {
+    width: 80%;
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+
+.main-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+/* --- MAIN PAGE -- */
+
+.main-page-cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 1rem;
+} 
+.main-page-card {
+    width: 100%;
+    font-display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: var(--accent-color);
+    border-radius: 0.25rem;
+}
+
+.main-page-card:hover {
+    background-color: var(--accent-color-hover);
+    box-shadow: var(--shadow-card);
+    transform: var(--card-transform)
+}
+
+.main-page-card h3 {
+    padding-bottom: 0.5rem;
+}
+
+/* --- VEHICLES --- */
+
+.items-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 1rem;
+}
+
+.item {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    background-color: var(--accent-color);
+    cursor: pointer;
+}
+
+.item:hover {
+    background-color: var(--accent-color-hover);
+    box-shadow: var(--shadow-card);
+    transform: var(--card-transform);
+}
+
+.item-title {
+    margin-bottom: 0.75rem;
+}
+.prompts {
+    /* margin-top: 1rem; */
+}
+.prompts-title {
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.elements-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.element {
+    padding: 0.25rem 0.5rem;
+    color: white;
+    font-size: small;
+    font-weight: 500;
+    background-color: var(--accent-bright-color);
+    border-radius: 0.2rem;
+}
+.no-elements {
+    opacity: 0.4;
+}
+.element:hover {
+    background-color: var(--accent-bright-color-hover);
+}
+
+.description-list {
+    margin-top: 0.5rem;
+}
+
+.description {
+    font-size: large;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.5rem;
+}
+
+/* --- FOOTER --- */
+
+.footer {
+    width: 100%;
+    height: 8rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    background-color: var(--footer-color);
+}
+
+.footer-title:not(:last-of-type) {
+    margin-right: 1rem;
+}
