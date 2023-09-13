@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="style/style.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <title>Registration service</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
@@ -21,6 +21,27 @@
         <div class="main-title"><h2>Зарегистрированнные клиенты</h2></div>
         <div class="main-content">
             <div class="items-list">
+                <div class="item" onclick="location.href='user.html'">
+                    <h3 class="item-title">Жмилев Геннадий Павлович</h3>
+                    <div class="prompts">
+                        <p>Номер пасспорта: 4620786543</p>
+                        <p class="prompts-title">Во владении:</p>
+                        <div class="elements-list">
+                            <a class="element" href="/vehicle.html">
+                                <p>BMW M3</p>
+                            </a>
+                            <a class="element" href="/vehicle.html">
+                                <p>Changan UNI-V</p>
+                            </a>
+                            <a class="element" href="/vehicle.html">
+                                <p>Audi A8</p>
+                            </a>
+                            <a class="element" href="/vehicle.html">
+                                <p>Lada Niva</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="item">
                     <h3 class="item-title">Жмилев Геннадий Павлович</h3>
                     <div class="prompts">
@@ -45,21 +66,10 @@
                 <div class="item">
                     <h3 class="item-title">Жмилев Геннадий Павлович</h3>
                     <div class="prompts">
-                        <p>Номер пасспорта: 4620786543</p>
+                        <p>Номер паспорта: 4620786543</p>
                         <p class="prompts-title">Во владении:</p>
                         <div class="elements-list">
-                            <a class="element" href="/vehicle">
-                                <p>BMW M3</p>
-                            </a>
-                            <a class="element" href="/vehicle">
-                                <p>Changan UNI-V</p>
-                            </a>
-                            <a class="element" href="/vehicle">
-                                <p>Audi A8</p>
-                            </a>
-                            <a class="element" href="/vehicle">
-                                <p>Lada Niva</p>
-                            </a>
+                            <p class="no-elements">Зарегистрированные автомобили отсутствуют</p>
                         </div>
                     </div>
                 </div>

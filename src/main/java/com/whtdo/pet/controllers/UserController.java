@@ -1,6 +1,5 @@
 package com.whtdo.pet.controllers;
 import com.whtdo.pet.dto.UserDTO;
-import com.whtdo.pet.dto.VehicleDTO;
 import com.whtdo.pet.entities.User;
 import com.whtdo.pet.entities.Vehicle;
 import com.whtdo.pet.repositories.UserRepository;
@@ -8,6 +7,7 @@ import com.whtdo.pet.repositories.VehicleRepository;
 import com.whtdo.pet.utils.exeptions.NotFoundException;
 import com.whtdo.pet.utils.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +23,8 @@ public class UserController {
     private final VehicleRepository vehicleRepository;
     private final UserMapper userMapper;
 
-    @GetMapping(value = "get_users")
-    public List<UserDTO> getUsers() {
+    @GetMapping(value = "users")
+    public String users(Model model) {
         List<User> users = userRepository.findAll();
         List<UserDTO> userDTOS = new ArrayList<>();
 
@@ -32,7 +32,8 @@ public class UserController {
             userDTOS.add(userMapper.EntityToDTO(user));
         }
 
-        return userDTOS;
+        model.addAttribute("userDTOS", userDTOS);
+        return "users";
     }
 
     @GetMapping(value = "get_user_by_passport_number")

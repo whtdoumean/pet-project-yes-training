@@ -1,23 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link rel="stylesheet" href="style/style.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <title>Registration service</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
 <div class="wrapper">
-    <div class="header">
-        <a class="header-title" href="home.html">ТСРА</a>
-        <div class="header-options">
-            <a class="header-option" href="users.html">Клиенты</a>
-            <a class="header-option" href="vehicles.html">Автомобили</a>
-            <a class="header-option" href="/vehicles">Добавить клиента</a>
-            <a class="header-option" href="/vehicles">Добавить автомобиль</a>
-            <a class="header-option" href="/vehicles">Добавить владение</a>
-        </div>
-    </div>
+    <header th:insert="blocks/header :: header"></header>
     <div class="main">
+        <h1 th:text="${test}"></h1>
         <div class="main-title"><h2>Добро пожалововать в Тестовый Сервис Регистрации Автомобилей!</h2></div>
         <div class="main-content">
             <div class="main-page-cards">
@@ -25,7 +17,7 @@
                     <h3>Автомобили</h3>
                     <p>Просмотреть интерактивный список зарегистрированных автомобилей</p>
                 </a>
-                <a class="main-page-card" href="users.html">
+                <a class="main-page-card" href="users">
                     <h3>Клиенты</h3>
                     <p>Просмотреть интерактивный список зарегистрированных клиентов</p>
                 </a>
@@ -40,10 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="footer">
-        <p class="footer-title">Spring Pet Project [yes-training]</p>
-        <p class="footer-title">2023, Илья Брыкин</p>
-    </div>
+    <footer th:insert="blocks/footer :: footer"></footer>
 </div>
 </body>
 </html>
