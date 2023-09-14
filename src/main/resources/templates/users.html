@@ -7,69 +7,21 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="header">
-        <a class="header-title" href="home.html">ТСРА</a>
-        <div class="header-options">
-            <a class="header-option" href="users.html">Клиенты</a>
-            <a class="header-option" href="vehicles.html">Автомобили</a>
-            <a class="header-option" href="/vehicles">Добавить клиента</a>
-            <a class="header-option" href="/vehicles">Добавить автомобиль</a>
-            <a class="header-option" href="/vehicles">Добавить владение</a>
-        </div>
-    </div>
+    <div th:replace="~{blocks/header :: header}"></div>
     <div class="main">
         <div class="main-title"><h2>Зарегистрированнные клиенты</h2></div>
         <div class="main-content">
             <div class="items-list">
-                <div class="item" onclick="location.href='user.html'">
-                    <h3 class="item-title">Жмилев Геннадий Павлович</h3>
+                <div th:each="user : ${userDTOS}" class="item" onclick="location.href='user?passport_number=${user.passportNumber}'">
+                    <h3 th:text="${user.getFullName()}" class="item-title">Иванов Иван Иванович</h3>
                     <div class="prompts">
-                        <p>Номер пасспорта: 4620786543</p>
+                        <p th:text="${'Номер паспорта: ' + user.passportNumber}">Номер паспорта: 4620111111</p>
                         <p class="prompts-title">Во владении:</p>
-                        <div class="elements-list">
-                            <a class="element" href="/vehicle.html">
-                                <p>BMW M3</p>
+                        <div th:with="have_vehicles = ${user.vehicleDTOS.size() != 0}" class="elements-list">
+                            <a th:if="${have_vehicles}" th:each="vehicle : ${user.vehicleDTOS}" class="element" href="/vehicle">
+                                <p th:text="${vehicle.getBrandAndModel()}">[Null]</p>
                             </a>
-                            <a class="element" href="/vehicle.html">
-                                <p>Changan UNI-V</p>
-                            </a>
-                            <a class="element" href="/vehicle.html">
-                                <p>Audi A8</p>
-                            </a>
-                            <a class="element" href="/vehicle.html">
-                                <p>Lada Niva</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <h3 class="item-title">Жмилев Геннадий Павлович</h3>
-                    <div class="prompts">
-                        <p>Номер пасспорта: 4620786543</p>
-                        <p class="prompts-title">Во владении:</p>
-                        <div class="elements-list">
-                            <a class="element" href="/vehicle">
-                                <p>BMW M3</p>
-                            </a>
-                            <a class="element" href="/vehicle">
-                                <p>Changan UNI-V</p>
-                            </a>
-                            <a class="element" href="/vehicle">
-                                <p>Audi A8</p>
-                            </a>
-                            <a class="element" href="/vehicle">
-                                <p>Lada Niva</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <h3 class="item-title">Жмилев Геннадий Павлович</h3>
-                    <div class="prompts">
-                        <p>Номер паспорта: 4620786543</p>
-                        <p class="prompts-title">Во владении:</p>
-                        <div class="elements-list">
-                            <p class="no-elements">Зарегистрированные автомобили отсутствуют</p>
+                            <p th:unless="${have_vehicles}" class="no-elements">Зарегистрированные автомобили отсутствуют</p>
                         </div>
                     </div>
                 </div>

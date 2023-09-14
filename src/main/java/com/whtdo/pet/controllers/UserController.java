@@ -2,11 +2,13 @@ package com.whtdo.pet.controllers;
 import com.whtdo.pet.dto.UserDTO;
 import com.whtdo.pet.entities.User;
 import com.whtdo.pet.entities.Vehicle;
+import com.whtdo.pet.repositories.ModelRepository;
 import com.whtdo.pet.repositories.UserRepository;
 import com.whtdo.pet.repositories.VehicleRepository;
 import com.whtdo.pet.utils.exeptions.NotFoundException;
 import com.whtdo.pet.utils.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,11 +18,12 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
     private final VehicleRepository vehicleRepository;
+    private final ModelRepository modelRepository;
     private final UserMapper userMapper;
 
     @GetMapping(value = "users")
@@ -33,6 +36,9 @@ public class UserController {
         }
 
         model.addAttribute("userDTOS", userDTOS);
+        model.addAttribute("vehicleRepository", vehicleRepository);
+        model.addAttribute("modelRepository", modelRepository);
+
         return "users";
     }
 

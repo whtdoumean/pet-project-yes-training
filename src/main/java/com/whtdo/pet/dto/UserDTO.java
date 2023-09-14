@@ -11,5 +11,9 @@ public class UserDTO {
     String surname;
     String name;
     String patronymic;
-    List<String> vehicleVins;
+    List<VehicleDTO> vehicleDTOS;
+
+    public String getFullName() {
+        return this.surname + " " + this.name + " " + this.patronymic;
+    }
 }

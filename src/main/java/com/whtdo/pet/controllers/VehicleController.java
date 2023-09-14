@@ -1,9 +1,7 @@
 package com.whtdo.pet.controllers;
 
 
-import com.whtdo.pet.dto.UserDTO;
 import com.whtdo.pet.dto.VehicleDTO;
-import com.whtdo.pet.entities.User;
 import com.whtdo.pet.entities.Vehicle;
 import com.whtdo.pet.repositories.VehicleRepository;
 import com.whtdo.pet.utils.mappers.VehicleMapper;
@@ -35,7 +33,7 @@ public class VehicleController {
     }
 
     @GetMapping(value = "get_vehicle_by_vin")
-    public VehicleDTO getVehicleBuyVin(@RequestParam(name = "vin", required = true) String vin) {
+    public VehicleDTO getVehicleByVin(@RequestParam(name = "vin", required = true) String vin) {
         return vehicleMapper.EntityToDTO(vehicleRepository.findByVin(vin).orElseThrow());
     }
 

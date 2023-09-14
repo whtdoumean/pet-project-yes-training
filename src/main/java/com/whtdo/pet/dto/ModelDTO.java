@@ -9,6 +9,6 @@ import java.util.UUID;
 public class ModelDTO {
     UUID id;
     String name;
-    UUID brandId;
+    BrandDTO brandDTO;
     List<String> vehicleVins;
 }

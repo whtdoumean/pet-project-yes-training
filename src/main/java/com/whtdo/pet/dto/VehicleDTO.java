@@ -11,6 +11,10 @@ import java.util.UUID;
 @Value
 public class VehicleDTO {
     String vin;
-    UUID modelId;
+    ModelDTO modelDTO;
     List<String> userPassportNumbers;
+
+    public String getBrandAndModel() {
+        return modelDTO.getBrandDTO().getName() + " " + modelDTO.getName();
+    }
 }
