@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -17,17 +18,17 @@ import java.util.List;
 public class UserMapper {
     private final VehicleMapper vehicleMapper;
     public UserDTO EntityToDTO(User user) {
-        List<VehicleDTO> vehicleDTOS = new ArrayList<>();
-        List<Vehicle> vehicles = user.getVehicles();
+        List<String> vehicleVins = new ArrayList<>();
+        List<Vehicle> vehicles = user.getVehicles().stream().toList();
         for (Vehicle vehicle : vehicles) {
-            vehicleDTOS.add(vehicleMapper.EntityToDTO(vehicle));
+            vehicleVins.add(vehicle.getVin());
         }
         return new UserDTO(
                 user.getPassportNumber(),
                 user.getSurname(),
                 user.getName(),
                 user.getPatronymic(),
-                vehicleDTOS
+                vehicleVins
         );
     };
 

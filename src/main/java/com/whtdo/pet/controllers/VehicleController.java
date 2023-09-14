@@ -1,9 +1,16 @@
 package com.whtdo.pet.controllers;
 
 
+import com.whtdo.pet.dto.BrandDTO;
+import com.whtdo.pet.dto.ModelDTO;
 import com.whtdo.pet.dto.VehicleDTO;
+import com.whtdo.pet.entities.Brand;
+import com.whtdo.pet.entities.Model;
 import com.whtdo.pet.entities.Vehicle;
+import com.whtdo.pet.repositories.ModelRepository;
 import com.whtdo.pet.repositories.VehicleRepository;
+import com.whtdo.pet.utils.mappers.BrandMapper;
+import com.whtdo.pet.utils.mappers.ModelMapper;
 import com.whtdo.pet.utils.mappers.VehicleMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +25,10 @@ import java.util.List;
 public class VehicleController {
     private final VehicleRepository vehicleRepository;
     private final VehicleMapper vehicleMapper;
+
+    private final BrandMapper brandMapper;
+
+    private final ModelMapper modelMapper;
 
     @GetMapping(value = "get_vehicles")
     public List<VehicleDTO> getVehicles() {
@@ -35,6 +46,26 @@ public class VehicleController {
     @GetMapping(value = "get_vehicle_by_vin")
     public VehicleDTO getVehicleByVin(@RequestParam(name = "vin", required = true) String vin) {
         return vehicleMapper.EntityToDTO(vehicleRepository.findByVin(vin).orElseThrow());
+    }
+
+    public ModelDTO getModelByVehicleVin(String vehicleVin) {
+        Vehicle vehicle = vehicleRepository.findByVin(vehicleVin).orElseThrow();
+        Model model = vehicle.getModel();
+        return modelMapper.EntityToDTO(model);
+    }
+
+    public BrandDTO getBrandByVehicleVin(String vehicleVin) {
+        Vehicle vehicle = vehicleRepository.findByVin(vehicleVin).orElseThrow();
+        Model model = vehicle.getModel();
+        Brand brand = model.getBrand();
+        return brandMapper.EntityToDTO(brand);
+    }
+
+    public String getBrandAndModelByVehicleVin(String vehicleVin) {
+        Vehicle vehicle = vehicleRepository.findByVin(vehicleVin).orElseThrow();
+        Model model = vehicle.getModel();
+        Brand brand = model.getBrand();
+        return brand.getName() + " " + model.getName();
     }
 
     @GetMapping(value = "add_vehicle")

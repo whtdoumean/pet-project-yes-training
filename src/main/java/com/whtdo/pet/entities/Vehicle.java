@@ -25,5 +25,5 @@ public class Vehicle {
             joinColumns = {@JoinColumn(name = "vin")},
             inverseJoinColumns = {@JoinColumn(name = "passport_number")}
     )
-    private List<User> users = new ArrayList<>();
+    private Set<User> users = new HashSet<>();
 }

@@ -1,6 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Registration service</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="wrapper">
+    <div th:replace="~{blocks/header :: header}"></div>
+    <div class="main">
+        <div class="main-title"><h2>Зарегистрированнные автомобили</h2></div>
+        <div class="main-content">
+            <div class="items-list">
+                <div th:each="vehicle : ${vehicleDTOS}" class="item" th:onclick="|location.href='@{/vehicle(vin=${vehicle.vin})}'|">
+                    <h3 th:text="${vehicleController.getBrandAndModelByVehicleVin(vehicle.vin)}" class="item-title">[Brand] [Model]</h3>
+                    <div class="prompts">
+                        <p th:text="${'VIN-номер: ' + vehicle.vin}">VIN-номер: [None]</p>
+                        <p class="prompts-title">Владельцы:</p>
+                        <div th:with="have_users = ${vehicle.passportNumbers.size() != 0}" class="elements-list">
+                            <a th:if="${have_users}" th:each="passportNumber : ${vehicle.passportNumbers}" class="element" th:href="@{/user(passport_number=${passportNumber})}">
+                                <p th:text="${userController.getUserInitials(passportNumber)}">[Null]</p>
+                            </a>
+                            <p th:unless="${have_users}" class="no-elements">Зарегистрированные клиенты отсутствуют</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{blocks/footer :: footer}"></div>
+</div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
     <link rel="stylesheet" href="../static/css/style.css">
     <title>Registration service</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

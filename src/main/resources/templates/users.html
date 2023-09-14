@@ -12,14 +12,14 @@
         <div class="main-title"><h2>Зарегистрированнные клиенты</h2></div>
         <div class="main-content">
             <div class="items-list">
-                <div th:each="user : ${userDTOS}" class="item" onclick="location.href='user?passport_number=${user.passportNumber}'">
+                <div th:each="user : ${userDTOS}" class="item" th:onclick="|location.href='@{/user(passport_number=${user.passportNumber})}'|">
                     <h3 th:text="${user.getFullName()}" class="item-title">Иванов Иван Иванович</h3>
                     <div class="prompts">
                         <p th:text="${'Номер паспорта: ' + user.passportNumber}">Номер паспорта: 4620111111</p>
                         <p class="prompts-title">Во владении:</p>
-                        <div th:with="have_vehicles = ${user.vehicleDTOS.size() != 0}" class="elements-list">
-                            <a th:if="${have_vehicles}" th:each="vehicle : ${user.vehicleDTOS}" class="element" href="/vehicle">
-                                <p th:text="${vehicle.getBrandAndModel()}">[Null]</p>
+                        <div th:with="have_vehicles = ${user.vehicleVins.size() != 0}" class="elements-list">
+                            <a th:if="${have_vehicles}" th:each="vehicleVin : ${user.vehicleVins}" class="element" th:href="@{/vehicle(vin=${vehicleVin})}">
+                                <p th:text="${vehicleController.getBrandAndModelByVehicleVin(vehicleVin)}">[Null]</p>
                             </a>
                             <p th:unless="${have_vehicles}" class="no-elements">Зарегистрированные автомобили отсутствуют</p>
                         </div>
@@ -28,10 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="footer">
-        <p class="footer-title">Spring Pet Project [yes-training]</p>
-        <p class="footer-title">2023, Илья Брыкин</p>
-    </div>
+    <div th:replace="~{blocks/footer :: footer}"></div>
 </div>
 </body>
 </html>

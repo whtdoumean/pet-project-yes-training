@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -31,6 +33,5 @@ public class User {
             joinColumns = {@JoinColumn(name = "passport_number")},
             inverseJoinColumns = {@JoinColumn(name = "vin")}
     )
-    private List<Vehicle> vehicles = new ArrayList<>();
-
+    private Set<Vehicle> vehicles = new HashSet<>();
 }

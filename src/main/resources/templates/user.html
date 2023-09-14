@@ -1,64 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <title>Registration service</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
 <div class="wrapper">
-    <div class="header">
-        <a class="header-title" href="home.html">ТСРА</a>
-        <div class="header-options">
-            <a class="header-option" href="users.html">Клиенты</a>
-            <a class="header-option" href="vehicles.html">Автомобили</a>
-            <a class="header-option" href="/vehicles">Добавить клиента</a>
-            <a class="header-option" href="/vehicles">Добавить автомобиль</a>
-            <a class="header-option" href="/vehicles">Добавить владение</a>
-        </div>
-    </div>
+    <div th:replace="~{blocks/header :: header}"></div>
     <div class="main">
-        <div class="main-title"><h2>Жмилев Геннадий Павлович</h2></div>
+        <div class="main-title"><h2 th:text="${userDTO.getFullName()}">[Full name]</h2></div>
         <div class="main-content">
             <div class="description">
-                <p class="description-element">
-                    <b>Номер паспорта:</b> 4620748389
+                <p class="description-element" th:utext="'<b>Номер паспорта:</b> ' + ${userDTO.passportNumber}">
+                    <b>Номер паспорта:</b> [None]
                 </p>
-                <p class="description-element">
-                    <b>Фамилия:</b> Жмилев
+                <p class="description-element" th:utext="'<b>Фамилия:</b> ' + ${userDTO.surname}">
+                    <b>Фамилия:</b> [None]
                 </p>
-                <p class="description-element">
-                    <b>Имя:</b> Геннадий
+                <p class="description-element" th:utext="'<b>Имя:</b> ' + ${userDTO.name}">
+                    <b>Имя:</b> [None]
                 </p>
-                <p class="description-element">
-                    <b>Отчество:</b> Павлович
+                <p class="description-element" th:utext="'<b>Отчество:</b> ' + ${userDTO.patronymic}">
+                    <b>Отчество:</b> [None]
                 </p>
                 <div class="description-list">
-                    <h3 class="description-title">
-                            Во владении:
-                    </h3>
-                    <div class="elements-list">
-                        <a class="element" href="/vehicle">
-                                <p>BMW M3</p>
+                    <h3 class="description-title">Во владении:</h3>
+                    <div th:with="have_vehicles = ${userDTO.vehicleVins.size() != 0}" class="elements-list">
+                        <a th:if="${have_vehicles}" th:each="vehicleVin : ${userDTO.vehicleVins}" class="element" th:href="@{/vehicle(vin=${vehicleVin})}">
+                            <p th:text="${vehicleController.getBrandAndModelByVehicleVin(vehicleVin)}">[Null]</p>
                         </a>
-                        <a class="element" href="/vehicle">
-                                <p>Changan UNI-V</p>
-                        </a>
-                        <a class="element" href="/vehicle">
-                                <p>Audi A8</p>
-                        </a>
-                        <a class="element" href="/vehicle">
-                                <p>Lada Niva</p>
-                        </a>    
+                        <p th:unless="${have_vehicles}" class="no-elements">Зарегистрированные автомобили отсутствуют</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer">
-        <p class="footer-title">Spring Pet Project [yes-training]</p>
-        <p class="footer-title">2023, Илья Брыкин</p>
-    </div>
+    <div th:replace="~{blocks/footer :: footer}"></div>
 </div>
 </body>
 </html>

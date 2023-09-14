@@ -1,6 +1,9 @@
 package com.whtdo.pet.utils.etc;
 
 import com.whtdo.pet.controllers.UserController;
+import com.whtdo.pet.controllers.VehicleController;
+import com.whtdo.pet.dto.UserDTO;
+import com.whtdo.pet.dto.VehicleDTO;
 import com.whtdo.pet.entities.Brand;
 import com.whtdo.pet.entities.Model;
 import com.whtdo.pet.entities.User;
@@ -29,6 +32,7 @@ public class DataLoader implements ApplicationRunner {
     private final ModelRepository modelRepository;
     private final BrandRepository brandRepository;
     private final UserController userController;
+    private final VehicleController vehicleController;
     private final Random random = new Random();
     public static Integer amountOfUsers = 40;
     public static Integer amountOfVehicles = 40;
@@ -47,15 +51,15 @@ public class DataLoader implements ApplicationRunner {
         vehicles.put("Changan", Arrays.asList("UNI-V", "UNI-K"));
 
         // names
-        List<String> names = Arrays.asList("Roma", "Igor", "Oleg", "Andrey", "Damir", "Vasiliy", "Maxim",
-                "Ivan", "Iliya");
+        List<String> names = Arrays.asList("Роман", "Игорь", "Олег", "Андрей", "Дамир", "Василий", "Максим",
+                "Иван", "Илья");
         // surnames
-        List<String> surnames = Arrays.asList("Ivanov", "Petrov", "Sidorov", "Melnikov", "Egorov", "Rybenkov",
-                "Kovalchuk", "Li", "Samko", "Rakitin", "Merzlyakov", "Necheparenko", "Muhametov", "Bolshakov",
-                "Lobanov", "Grigoryan", "Krohin", "Kornienko", "Rutov", "Menshikov", "Antonov");
+        List<String> surnames = Arrays.asList("Иванов", "Петров", "Сидоров", "Мельников", "Егоров", "Рубеньков",
+                "Ковальчук", "Балаев", "Савин", "Ракитин", "Мерзляков", "Нечепаренко", "Мухаметов", "Кожевин",
+                "Лобанов", "Григорян", "Крохин", "Корниенко", "Рютов", "Меньшиков", "Антонов");
         // patronymics
-        List<String> patronymics = Arrays.asList("Ivanovich", "Ruslanovich", "Ilich", "Maximovich", "Aleksandovich",
-                "Artemovich", "Romanovich", "Alekseevich", "Vyacheslavovich", "Valerievich", "Vladimirivich");
+        List<String> patronymics = Arrays.asList("Иванович", "Русланович", "Ильич", "Максимович", "Александрович",
+                "Артемович", "Романович", "Алексеевич", "Вячеславович", "Валерьевич", "Владимирович");
 
         // brands loading
         for (String brandName : vehicles.keySet()) {
@@ -111,10 +115,18 @@ public class DataLoader implements ApplicationRunner {
 
         // relationships generating
         for (int i = 0; i < amountOfRelationships; i++) {
-            userController.addVehicleToUser(
-                    vins.get(random.nextInt(vins.size())),
-                    passportNumbers.get(random.nextInt(passportNumbers.size()))
-            );
+            String vin = vins.get(random.nextInt(vins.size())); // choose vin
+            String passportNumber = passportNumbers.get(random.nextInt(passportNumbers.size())); // choose passport
+            UserDTO userDTO = userController.getUserByPassportNumber(passportNumber); // find user dto
+            if (!userDTO.getVehicleVins().contains(vin)) { // if dto did not contain vin
+                System.out.println("relationship not exist");
+                userController.addVehicleToUser(
+                        vin,
+                        passportNumber
+                );
+            } else {
+                System.out.println("relationship already exist");
+            }
         }
     }
 
