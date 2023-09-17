@@ -21,6 +21,7 @@
                     <span class="form-input-label">Модель автомобиля</span>
                     <input class="form-input name" type="text" placeholder="Введите модель автомобиля" th:field="*{modelName}">
                     <div class="alert alert-warning" th:if="${#fields.hasErrors('modelName')}" th:errors="*{modelName}"></div>
+                    <div class="alert alert-danger" th:if="${!modelExist} and *{modelName.length() gt 0}" th:text="'Модель с названием ' + *{modelName} + ' не существует!'"></div>
                 </div>
                 <button class="submit-button" type="submit" action="#">Добавить автомобиль</button>
             </form>

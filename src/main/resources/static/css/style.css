@@ -275,9 +275,20 @@ a {
 .alert-warning {
     width: 100%;
     padding: 0.75rem;
-    background-color: #FF6633;
+    background-color: #FFA633;
     color: white;
     border-radius: 0.25rem;
+    font-weight: 400;
+}
+
+.alert-danger {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #F34213;
+    color: white;
+    border-radius: 0.25rem;
+    font-weight: 400;
 }
 
 .form-button-container {
@@ -313,13 +324,6 @@ a {
     background-color: var(--accent-bright-color);
     box-shadow: none;
     transform: none;
-}
-
-/* --- SUCCESS PAGE --- */
-
-.big-img {
-    width: 100%;
-    height: auto;
 }
 
 /* --- FOOTER --- */

@@ -4,6 +4,7 @@ import com.whtdo.pet.dto.UserDTO;
 import com.whtdo.pet.dto.VehicleDTO;
 import com.whtdo.pet.entities.User;
 import com.whtdo.pet.entities.Vehicle;
+import com.whtdo.pet.entities.utils.FormViewRelationship;
 import com.whtdo.pet.entities.utils.FormViewVehicle;
 import com.whtdo.pet.repositories.ModelRepository;
 import com.whtdo.pet.repositories.UserRepository;
@@ -90,6 +91,7 @@ public class MainController {
     @PostMapping("/new_user")
     public String newUserValidate(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("title","ТСРА - Добавить нового клиента");
             return "new_user";
         } else {
             System.out.println(user);
@@ -133,6 +135,7 @@ public class MainController {
     @GetMapping(value = "new_vehicle")
     public String newVehicleForm(FormViewVehicle formViewVehicle, Model model) {
         model.addAttribute("formViewVehicle", formViewVehicle);
+        model.addAttribute("modelExist", true);
 
         model.addAttribute("title","ТСРА - Добавить новый автомобиль");
         return "new_vehicle";
@@ -143,6 +146,8 @@ public class MainController {
                                      BindingResult result,
                                      Model model) throws NotFoundException {
         if (result.hasErrors()) {
+            model.addAttribute("modelExist", true);
+            model.addAttribute("title","ТСРА - Добавить новый автомобиль");
             return "new_vehicle";
         } else {
             try {
@@ -158,39 +163,55 @@ public class MainController {
                 vehicleRepository.save(vehicle);
                 return "redirect:vehicle?vin=".concat(vehicle.getVin());
             } catch (NotFoundException e) {
+                if (e.getMessage().contains("Модель")) {
+                    model.addAttribute("modelExist", false);
+
+                    model.addAttribute("title","ТСРА - Добавить новый автомобиль");
+                    return "new_vehicle";
+                }
                 return "redirect:error";
             }
         }
     }
 
-    @GetMapping(value = "new_vehicle")
-    public String newVehicleForm(FormViewVehicle formViewVehicle, Model model) {
-        model.addAttribute("formViewVehicle", formViewVehicle);
+    @GetMapping(value = "new_relationship")
+    public String newRelationshipForm(FormViewRelationship formViewRelationship, Model model) {
+        model.addAttribute("formViewRelationship", formViewRelationship);
+        model.addAttribute("userExist", true);
+        model.addAttribute("vehicleExist", true);
 
-        model.addAttribute("title","ТСРА - Добавить новый автомобиль");
-        return "new_vehicle";
+        model.addAttribute("title","ТСРА - Зарегистрировать новое право владения");
+        return "new_relationship";
     }
 
-    @PostMapping("/new_vehicle")
-    public String newVehicleValidate(@Valid @ModelAttribute("formViewVehicle") FormViewVehicle formViewVehicle,
+    @PostMapping("/new_relationship")
+    public String newRelationshipValidate(@Valid @ModelAttribute("formViewRelationship") FormViewRelationship formViewRelationship,
                                      BindingResult result,
-                                     Model model) throws NotFoundException {
-        if (result.hasErrors()) {
-            return "new_vehicle";
+                                     Model model) throws Exception {
+        if (result.hasErrors() || userRepository.findByPassportNumber(formViewRelationship.getPassportNumber()).isEmpty()
+                || vehicleRepository.findByVin(formViewRelationship.getVin()).isEmpty()) {
+            model.addAttribute("userExist", userRepository.findByPassportNumber(formViewRelationship.getPassportNumber()).isPresent());
+            model.addAttribute("vehicleExist", vehicleRepository.findByVin(formViewRelationship.getVin()).isPresent());
+
+            return "new_relationship";
         } else {
             try {
-                com.whtdo.pet.entities.Model vehicleModel = modelRepository.
-                        findByName(formViewVehicle.getModelName()).
-                        orElseThrow(() -> new NotFoundException("Модель "
-                                .concat(formViewVehicle.getModelName())
-                                .concat(" не найдена")));
-                Vehicle vehicle = new Vehicle();
-                vehicle.setVin(formViewVehicle.getVin());
-                vehicle.setModel(vehicleModel);
+                User user = userRepository.findByPassportNumber(formViewRelationship.getPassportNumber()).
+                        orElseThrow(() -> new NotFoundException("Клиент c номером паспорта: "
+                                .concat(formViewRelationship.getPassportNumber())
+                                .concat(" не найден")));
+                Vehicle vehicle = vehicleRepository.findByVin(formViewRelationship.getVin()).
+                        orElseThrow(() -> new NotFoundException("Автомобиль с VIN-номером: "
+                                .concat(formViewRelationship.getVin())
+                                .concat(" не найден")));
 
+                user.getVehicles().add(vehicle);
+                vehicle.getUsers().add(user);
+
+                userRepository.save(user);
                 vehicleRepository.save(vehicle);
-                return "redirect:vehicle?vin=".concat(vehicle.getVin());
-            } catch (NotFoundException e) {
+                return "redirect:user?passport_number=".concat(user.getPassportNumber());
+            } catch (Exception e) {
                 return "redirect:error";
             }
         }
