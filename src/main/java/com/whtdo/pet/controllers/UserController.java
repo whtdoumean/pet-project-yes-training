@@ -47,7 +47,7 @@ public class UserController {
         return userMapper.EntityToDTO(userRepository.findByPassportNumber(passportNumber).orElseThrow());
     }
 
-    @GetMapping(value = "add_user")
+    @GetMapping(value = "add_user_manually")
     public String addUser(@RequestParam(name = "passport_number", required = true) String passportNumber,
                         @RequestParam(name = "name", required = true) String name,
                         @RequestParam(name = "surname", required = true) String surname,

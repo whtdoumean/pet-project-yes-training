@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title th:text="${title}">[Null]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="wrapper non-scroll">
+    <div th:replace="~{blocks/header :: header}"></div>
+    <div class="main form-widht">
+        <div class="main-title"><h2>Добавить новый автомобиль</h2></div>
+        <div class="main-content">
+            <form class="new-form" action="#" th:action="@{/new_vehicle}" method="post" th:object="${formViewVehicle}">
+                <div class="input-container">
+                    <span class="form-input-label">VIN-номер</span>
+                    <input id="vin-number" class="form-input vin-number" type="text" placeholder="Введите VIN-номер автомобиля" th:field="*{vin}">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('vin')}" th:errors="*{vin}"></div>
+                </div>
+                <div class="input-container">
+                    <span class="form-input-label">Модель автомобиля</span>
+                    <input class="form-input name" type="text" placeholder="Введите модель автомобиля" th:field="*{modelName}">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('modelName')}" th:errors="*{modelName}"></div>
+                </div>
+                <button class="submit-button" type="submit" action="#">Добавить автомобиль</button>
+            </form>
+        </div>
+    </div>
+    <div th:replace="~{blocks/footer :: footer}"></div>
+</div>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/maskedinput.js}"></script>
+<script th:src="@{/js/utils.js}"></script>
+</body>
+</html>

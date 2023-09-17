@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>ТСРА - ошибка</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="wrapper non-scroll">
+    <div th:replace="~{blocks/header :: header}"></div>
+    <div class="main form-widht">
+        <div class="main-title"><h2>Ошибка</h2></div>
+        <div class="main-content">
+            <div class="description">
+                <p class="description-element">
+                    Произошла непредвиденная ошибка
+                </p>
+            </div>
+            <button class="submit-button" onclick="window.location.href = '/';" style="margin-top:1rem;">Вернуться на главную</button>
+        </div>
+    </div>
+    <div th:replace="~{blocks/footer :: footer}"></div>
+</div>
+</body>
+</html>

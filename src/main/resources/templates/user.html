@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>Registration service</title>
+    <title th:text="${title}">[Null]</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper non-scroll">
     <div th:replace="~{blocks/header :: header}"></div>
-    <div class="main">
-        <div class="main-title"><h2 th:text="${userDTO.getFullName()}">[Full name]</h2></div>
+    <div class="main form-widht">
+        <div class="main-title"><h2 th:text="${mainTitle}">[Full name]</h2></div>
         <div class="main-content">
             <div class="description">
                 <p class="description-element" th:utext="'<b>Номер паспорта:</b> ' + ${userDTO.passportNumber}">

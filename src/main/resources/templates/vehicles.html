@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>Registration service</title>
+    <title th:text="${title}">[Null]</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
@@ -21,7 +21,7 @@
                             <a th:if="${have_users}" th:each="passportNumber : ${vehicle.passportNumbers}" class="element" th:href="@{/user(passport_number=${passportNumber})}">
                                 <p th:text="${userController.getUserInitials(passportNumber)}">[Null]</p>
                             </a>
-                            <p th:unless="${have_users}" class="no-elements">Зарегистрированные клиенты отсутствуют</p>
+                            <p th:unless="${have_users}" class="no-elements">Зарегистрированные владельцы отсутствуют</p>
                         </div>
                     </div>
                 </div>

@@ -40,12 +40,15 @@ a {
     justify-content: space-between;
 }
 
+.non-scroll {
+    padding: 0 1rem 0 0;
+}
+
 /* --- HEADER --- */
 
 .header {
     width: 1264px;
-    height: 4vh;
-    padding: 1.5rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     position: fixed;
     border-radius: 0.5rem;
     margin-top: 1rem;
@@ -56,6 +59,7 @@ a {
     background-color: var(--header-color);
     color: white;
     z-index: 100;
+    box-shadow: 0px 6px 16px -2px rgba(0, 0, 0, 0.2);;
 }
 
 .header-title {
@@ -147,7 +151,7 @@ a {
     padding-bottom: 0.5rem;
 }
 
-/* --- VEHICLES --- */
+/* --- LISTS --- */
 
 .items-list {
     width: 100%;
@@ -175,9 +179,7 @@ a {
 .item-title {
     margin-bottom: 0.75rem;
 }
-.prompts {
-    /* margin-top: 1rem; */
-}
+
 .prompts-title {
     font-weight: 600;
     margin-top: 0.5rem;
@@ -207,6 +209,8 @@ a {
     background-color: var(--accent-bright-color-hover);
 }
 
+/* --- DESCRIPTION --- */
+
 .description-list {
     margin-top: 0.5rem;
 }
@@ -217,6 +221,105 @@ a {
     flex-direction: column;
     gap: 0.75rem;
     padding: 0.5rem;
+}
+
+/* --- FORM --- */
+
+.form-widht {
+    width: 444px;
+}
+
+.new-form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+}
+
+.input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: fit-content;
+    padding: 0.5rem;
+    background-color: var(--background-color);
+    border: 1.5px solid var(--footer-color);
+    border-radius: 0.25rem;
+}
+
+.form-input-label {
+    font-size: small;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    outline: none;
+    height: 2rem;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: medium;
+}
+
+.form-input:focus {
+    outline: none;
+    border: none;
+}
+
+.form-input::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.alert-warning {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #FF6633;
+    color: white;
+    border-radius: 0.25rem;
+}
+
+.form-button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0 1rem;
+    margin-top: 1rem;
+}
+
+.submit-button {
+    outline: none;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.75rem 2rem;
+    font-size: medium;
+    font-weight: 600;
+    color: white;
+    background-color: var(--accent-bright-color);
+    transition: all ease-in-out .2s;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    outline: none;
+    background-color: var(--accent-bright-color-hover);
+    box-shadow: 0px 6px 16px -6px var(--accent-bright-color);
+    transform: var(--card-transform);
+}
+
+.submit-button:active {
+    background-color: var(--accent-bright-color);
+    box-shadow: none;
+    transform: none;
+}
+
+/* --- SUCCESS PAGE --- */
+
+.big-img {
+    width: 100%;
+    height: auto;
 }
 
 /* --- FOOTER --- */

@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>Registration service</title>
+    <title th:text="${title}">[Null]</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper non-scroll">
     <div th:replace="~{blocks/header :: header}"></div>
-    <div class="main">
-        <div class="main-title"><h2 th:text="${vehicleController.getBrandAndModelByVehicleVin(vehicleDTO.vin)}">[Brand Model]</h2></div>
+    <div class="main form-widht">
+        <div class="main-title"><h2 th:text="${mainTitle}">[Brand Model]</h2></div>
         <div class="main-content">
             <div class="description">
                 <p class="description-element" th:utext="'<b>VIN-номер:</b> ' + ${vehicleDTO.vin}">
@@ -27,7 +27,7 @@
                         <a th:if="${have_users}" th:each="passportNumber : ${vehicleDTO.passportNumbers}" class="element" th:href="@{/user(passport_number=${passportNumber})}">
                             <p th:text="${userController.getUserInitials(passportNumber)}">[Null]</p>
                         </a>
-                        <p th:unless="${have_users}" class="no-elements">Зарегистрированные клиенты отсутствуют</p>
+                        <p th:unless="${have_users}" class="no-elements">Зарегистрированные владельцы отсутствуют</p>
                     </div>
                 </div>
             </div>

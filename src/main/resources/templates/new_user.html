@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title th:text="${title}">[Null]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="wrapper non-scroll">
+    <div th:replace="~{blocks/header :: header}"></div>
+    <div class="main form-widht">
+        <div class="main-title"><h2>Добавить нового клиента</h2></div>
+        <div class="main-content">
+            <form class="new-form" action="#" th:action="@{/new_user}" method="post" th:object="${user}">
+                <div class="input-container">
+                    <span class="form-input-label">Номер паспорта</span>
+                    <input id="passport-number" class="form-input passport-number" type="text" placeholder="Введите номер паспорта клиента" th:field="*{passportNumber}">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('passportNumber')}" th:errors="*{passportNumber}"></div>
+                </div>
+                <div class="input-container">
+                    <span class="form-input-label">Фамилия клиента</span>
+                    <input class="form-input surname" type="text" placeholder="Введите фамилию клиента" th:field="*{surname}">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+                </div>
+                <div class="input-container">
+                    <span class="form-input-label">Имя клиента</span>
+                    <input class="form-input name" type="text" placeholder="Введите имя клиента" th:field="*{name}">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+                <div class="input-container">
+                    <span class="form-input-label">Отчество клиента</span>
+                    <input class="form-input patronymic" type="text" placeholder="Введите отчество клиента" th:field="*{patronymic}">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}"></div>
+                </div>
+                <button class="submit-button" type="submit" action="#">Добавить клиента</button>
+            </form>
+        </div>
+    </div>
+    <div th:replace="~{blocks/footer :: footer}"></div>
+</div>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/maskedinput.js}"></script>
+<script th:src="@{/js/utils.js}"></script>
+</body>
+</html>
